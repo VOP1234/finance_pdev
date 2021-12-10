@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "finance_pdev1",
+    "slug": "finance_pdev1",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "finance_pdev1"
+}
