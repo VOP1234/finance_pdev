@@ -56,8 +56,8 @@ export function Dashboard() {
   ) {
     const lastTransaction = new Date(
       Math.max.apply(Math, collection
-        .filter((transaction) => transaction.type === type)
-        .map((transaction) => new Date(transaction.date).getTime())
+        .filter(transaction => transaction.type === type)
+        .map(transaction => new Date(transaction.date).getTime())
       ))
 
     return `${lastTransaction.getDate()} de ${lastTransaction.toLocaleString('pt-BR', { month: 'long' })}`
@@ -102,8 +102,8 @@ export function Dashboard() {
         }
       })
 
+    console.log(transactionFormatted)
     setTransactions(transactionFormatted)
-
     const lastTransactionEntries = getLastTransactionDate(allTransactions, 'positive')
     const lastTransactionExpensive = getLastTransactionDate(allTransactions, 'negative')
     const totalInterval = `01 a ${lastTransactionExpensive}`
