@@ -1,11 +1,11 @@
 {
-    "name": "financepdev",
-    "displayName": "financepdev",
+    "name": "financeportal",
+    "displayName": "financeportal",
     "expo": {
-        "owner": "portaldev",
-        "name": "financepdev",
-        "slug": "financepdev",
-        "scheme": "financepdev",
+        "owner": "vitorpereira",
+        "name": "financeportal",
+        "slug": "financeportal",
+        "scheme": "financeportal",
         "version": "1.0.0",
         "assetBundlePatterns": ["**/*"]
     }
