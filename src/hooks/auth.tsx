@@ -1,5 +1,6 @@
-import React, { createContext, ReactNode, useContext, useState } from "react";
+import React, { createContext, ReactNode, useContext, useEffect, useState } from "react";
 
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const { CLIENT_ID } = process.env;
 const { REDIRECT_URI } = process.env;
@@ -36,6 +37,7 @@ const AuthContext = createContext({} as IAuthContextData);
 function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User>({} as User);
 
+  const dataKey = '@vepfinance:transaction'
   async function signInWithGoogle() {
     try {
       const RESPONSE_TYPE = "token";
@@ -53,12 +55,16 @@ function AuthProvider({ children }: AuthProviderProps) {
         );
         const userInfo = await response.json()
 
-        setUser({
+        const userData = {
           id: userInfo.id,
           email: userInfo.email,
           name: userInfo.given_name,
           photo: userInfo.picture,
-        });
+        }
+
+        setUser(userData);
+
+
       }
     } catch (error) {
       console.log("error")
@@ -84,12 +90,19 @@ function AuthProvider({ children }: AuthProviderProps) {
           photo: undefined,
         }
         setUser(userLogged)
+        await AsyncStorage.
       }
 
     } catch (error) {
       throw new Error(error as string)
     }
   }
+
+  useEffect({
+   async function  loadUserStoregeDate() {
+     const date
+   }
+  },[])
 
   return (
     <AuthContext.Provider 

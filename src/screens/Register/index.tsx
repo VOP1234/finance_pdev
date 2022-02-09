@@ -48,6 +48,8 @@ export function Register() {
   const [transactionType, setTransactionType] = useState("");
   const [categoryModalOpen, setCategoryModalOpen] = useState(false);
 
+  const dataKey = "@finance_pdev:transaction";
+
   const [category, setCategory] = useState({
     key: "category",
     name: "Categoria",
@@ -90,8 +92,6 @@ export function Register() {
     };
 
     try {
-      const dataKey = "@vepfinance:transaction";
-
       const data = await AsyncStorage.getItem(dataKey);
       const currentData = data ? JSON.parse(data) : [];
 
@@ -114,6 +114,7 @@ export function Register() {
       Alert.alert("Não foi possível salvar.");
     }
   }
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <Container>
