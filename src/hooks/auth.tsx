@@ -1,4 +1,10 @@
-import React, { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import React, {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -6,7 +12,7 @@ const { CLIENT_ID } = process.env;
 const { REDIRECT_URI } = process.env;
 
 import * as AuthSession from "expo-auth-session";
-import * as AppleAuthentication from 'expo-apple-authentication';
+import * as AppleAuthentication from "expo-apple-authentication";
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -36,8 +42,9 @@ const AuthContext = createContext({} as IAuthContextData);
 
 function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User>({} as User);
+  const [userStorageLoading, setUserStorageLoading] = useState(true);
 
-  const dataKey = '@vepfinance:transaction'
+  const dataKeyUser = "@portaldev:user";
   async function signInWithGoogle() {
     try {
       const RESPONSE_TYPE = "token";
@@ -48,68 +55,76 @@ function AuthProvider({ children }: AuthProviderProps) {
       const { params, type } = (await AuthSession.startAsync({
         authUrl,
       })) as AuthorizationResponse;
-      
+
       if (type === "success") {
         const response = await fetch(
           `https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${params.access_token}`
         );
-        const userInfo = await response.json()
+        const userInfo = await response.json();
 
         const userData = {
           id: userInfo.id,
           email: userInfo.email,
           name: userInfo.given_name,
           photo: userInfo.picture,
-        }
+        };
 
         setUser(userData);
-
-
+        await AsyncStorage.setItem(dataKeyUser, JSON.stringify(userData));
       }
     } catch (error) {
-      console.log("error")
-      console.log(error)
+      console.log("error");
+      console.log(error);
       throw new Error(error as string);
     }
   }
 
-  async function signInWithApple(){
+  async function signInWithApple() {
     try {
       const credential = await AppleAuthentication.signInAsync({
         requestedScopes: [
           AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
           AppleAuthentication.AppleAuthenticationScope.EMAIL,
-        ]
-      })
+        ],
+      });
 
-      if(credential){
+      if (credential) {
         const userLogged = {
           id: String(credential.user),
           email: credential.email!,
           name: credential.fullName!.givenName!,
           photo: undefined,
-        }
-        setUser(userLogged)
-        await AsyncStorage.
-      }
+        };
+        setUser(userLogged);
 
+        await AsyncStorage.setItem(dataKeyUser, JSON.stringify(userLogged));
+      }
     } catch (error) {
-      throw new Error(error as string)
+      throw new Error(error as string);
     }
   }
 
-  useEffect({
-   async function  loadUserStoregeDate() {
-     const date
-   }
-  },[])
+  useEffect(() => {
+    async function loadUserStorageDate() {
+      const userStorage = await AsyncStorage.getItem(dataKeyUser);
+
+      if (userStorage) {
+        const userLogged = JSON.parse(userStorage) as User;
+
+        setUser(userLogged);
+      }
+      setUserStorageLoading(false);
+    }
+
+    loadUserStorageDate();
+  }, []);
 
   return (
-    <AuthContext.Provider 
-    value={{ 
-      user, 
-      signInWithGoogle, 
-      signInWithApple 
+    <AuthContext.Provider
+      value={{
+        user,
+        signInWithGoogle,
+        signInWithApple,
       }}>
       {children}
     </AuthContext.Provider>
