@@ -60,12 +60,20 @@ export function Dashboard() {
     collection: DataListProps[],
     type: "positive" | "negative"
   ) {
+    const collectionFiltered = collection.filter(
+      (transaction) => transaction.type === type
+    );
+
+    if (collectionFiltered.length === 0) {
+      return 0;
+    }
+
     const lastTransaction = new Date(
       Math.max.apply(
         Math,
-        collection
-          .filter((transaction) => transaction.type === type)
-          .map((transaction) => new Date(transaction.date).getTime())
+        collectionFiltered.map((transaction) =>
+          new Date(transaction.date).getTime()
+        )
       )
     );
 
@@ -76,7 +84,7 @@ export function Dashboard() {
   }
 
   async function loadTransactions() {
-    const dataKey = "@vepfinance:transaction";
+    const dataKey = `@finance_pdev:transaction_user: ${user.id}`;
     const response = await AsyncStorage.getItem(dataKey);
     const allTransactions = response ? JSON.parse(response) : [];
 
@@ -122,7 +130,11 @@ export function Dashboard() {
       allTransactions,
       "negative"
     );
-    const totalInterval = `01 a ${lastTransactionExpensive}`;
+
+    const totalInterval =
+      lastTransactionExpensive === 0
+        ? "Nâo há transações"
+        : `01 a ${lastTransactionExpensive}`;
 
     const total = entriesTotal - expensiveTotal;
 
@@ -139,14 +151,20 @@ export function Dashboard() {
           style: "currency",
           currency: "BRL",
         }),
-        lastTransaction: `Última entrada dia ${lastTransactionEntries}`,
+        lastTransaction:
+          lastTransactionEntries === 0
+            ? "Não há transações"
+            : `Última entrada dia ${lastTransactionEntries}`,
       },
       expensive: {
         amount: Number(expensiveTotal).toLocaleString("pt-BR", {
           style: "currency",
           currency: "BRL",
         }),
-        lastTransaction: `Última saída dia ${lastTransactionExpensive}`,
+        lastTransaction:
+          lastTransactionExpensive === 0
+            ? "Não há transações"
+            : `Última saída dia ${lastTransactionExpensive}`,
       },
     });
 
