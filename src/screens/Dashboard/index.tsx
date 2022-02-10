@@ -76,7 +76,7 @@ export function Dashboard() {
   }
 
   async function loadTransactions() {
-    const dataKey = "@vepfinance:transaction";
+    const dataKey = `@finance_pdev:transaction_user: ${user.id}`;
     const response = await AsyncStorage.getItem(dataKey);
     const allTransactions = response ? JSON.parse(response) : [];
 
