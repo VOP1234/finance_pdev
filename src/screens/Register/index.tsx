@@ -10,11 +10,11 @@ import { useNavigation } from "@react-navigation/native";
 import { Button } from "../../components/Form/Button";
 import { SelectButton } from "../../components/Form/SelectButton";
 import { TransactionTypeButton } from "../../components/Form/TransactionTypeButton";
-import { PaymentTypesSelect } from "../PaymentTypesSelect";
+// import { PaymentTypesSelect } from "../PaymentTypesSelect";
 import { InputForm } from "../../components/Form/InputForm";
 import { useForm } from "react-hook-form";
 
-import { CategorySelect } from "../CategorySelect";
+import { CategorySelect } from "./CategorySelect";
 
 import {
   Container,
@@ -164,7 +164,11 @@ export function Register() {
             />
           </Fields>
 
-          <Button title="Enviar" onPress={handleSubmit(handleRegister)} />
+          <Button
+            color="secondary"
+            title="Enviar"
+            onPress={handleSubmit(handleRegister)}
+          />
         </Form>
 
         <Modal visible={categoryModalOpen}>

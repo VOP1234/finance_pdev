@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { ActivityIndicator } from "react-native";
+import { ActivityIndicator, Modal } from "react-native";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -27,9 +27,11 @@ import {
   TransactionList,
   LogoutButton,
   LoadContainer,
+  SettingsButton,
 } from "./styles";
 import { useTheme } from "styled-components";
 import { useAuth } from "../../hooks/auth";
+import { Configuration } from "./Configuration";
 
 interface HighlightProps {
   amount: string;
@@ -52,6 +54,7 @@ export function Dashboard() {
   const [highlightData, setHighlightData] = useState<HighlightData>(
     {} as HighlightData
   );
+  const [categoryModalOpen, setCategoryModalOpen] = useState(false);
 
   const theme = useTheme();
   const { signOut, user } = useAuth();
@@ -122,6 +125,7 @@ export function Dashboard() {
     );
 
     setTransactions(transactionFormatted);
+
     const lastTransactionEntries = getLastTransactionDate(
       allTransactions,
       "positive"
@@ -171,6 +175,14 @@ export function Dashboard() {
     setIsLoading(false);
   }
 
+  function handleOpenSelectCategoryModal() {
+    setCategoryModalOpen(true);
+  }
+
+  function handleCloseSelectCategoryModal() {
+    setCategoryModalOpen(false);
+  }
+
   useEffect(() => {
     loadTransactions();
 
@@ -206,8 +218,11 @@ export function Dashboard() {
                 </User>
               </UserInfo>
 
+              <SettingsButton onPress={handleOpenSelectCategoryModal}>
+                <Icon color="success" name="settings" />
+              </SettingsButton>
               <LogoutButton onPress={signOut}>
-                <Icon name="power" />
+                <Icon color="attention" name="power" />
               </LogoutButton>
             </UserWrapper>
           </Header>
@@ -240,6 +255,11 @@ export function Dashboard() {
               renderItem={({ item }) => <TransactionCard data={item} />}
             />
           </Transactions>
+          <Modal visible={categoryModalOpen}>
+            <Configuration
+              closeSelectCategory={handleCloseSelectCategoryModal}
+            />
+          </Modal>
         </>
       )}
     </Container>

@@ -10,6 +10,10 @@ import {
 import { DataListProps } from ".";
 import { BorderlessButton } from "react-native-gesture-handler";
 
+interface IconProps {
+  color: "attention" | "success";
+}
+
 export const Container = styled.View`
   flex: 1;
 
@@ -70,8 +74,13 @@ export const UserName = styled.Text`
 
 export const LogoutButton = styled(BorderlessButton)``;
 
-export const Icon = styled(Feather)`
-  color: ${({ theme }) => theme.colors.secondary};
+export const SettingsButton = styled(BorderlessButton)``;
+
+export const Icon = styled(Feather)<IconProps>`
+  ${({ color, theme }) =>
+    color === "attention"
+      ? "color: " + theme.colors.attention
+      : "color: " + theme.colors.success};
   font-size: ${RFValue(24)}px;
 `;
 

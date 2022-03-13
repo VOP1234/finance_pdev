@@ -1,7 +1,7 @@
 import React from "react";
 import { FlatList } from "react-native";
-import { Button } from "../../components/Form/Button";
-import { paymentTypes } from "../../utils/paymentTypes";
+import { Button } from "../../../../components/Form/Button";
+import { paymentTypes } from "../../../../utils/paymentTypes";
 
 import {
   Container,
@@ -15,25 +15,23 @@ import {
 } from "./styles";
 
 interface PaymentTypes {
-  key: string
-  name: string
+  key: string;
+  name: string;
 }
 
 interface Props {
-  paymentType: PaymentTypes
-  setPaymentType: (paymentType: PaymentTypes) => void
-  closeSelectPaymentType: () => void
-
+  paymentType: PaymentTypes;
+  setPaymentType: (paymentType: PaymentTypes) => void;
+  closeSelectPaymentType: () => void;
 }
 
 export function PaymentTypesSelect({
   paymentType,
   setPaymentType,
-  closeSelectPaymentType
+  closeSelectPaymentType,
 }: Props) {
-
   function handlePaymentTypes(paymentType: PaymentTypes) {
-    setPaymentType(paymentType)
+    setPaymentType(paymentType);
   }
 
   return (
@@ -44,7 +42,7 @@ export function PaymentTypesSelect({
 
       <FlatList
         data={paymentTypes}
-        style={{ flex: 1, width: '100%' }}
+        style={{ flex: 1, width: "100%" }}
         keyExtractor={(item) => item.key}
         renderItem={({ item }) => (
           <Category
@@ -59,11 +57,8 @@ export function PaymentTypesSelect({
       />
 
       <Footer>
-        <Button
-          title="Selecionar"
-          onPress={closeSelectPaymentType}
-        />
+        <Button title="Selecionar" onPress={closeSelectPaymentType} />
       </Footer>
     </Container>
-  )
+  );
 }
