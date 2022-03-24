@@ -28,6 +28,7 @@ import {
   LogoutButton,
   LoadContainer,
   SettingsButton,
+  HeaderButtons,
 } from "./styles";
 import { useTheme } from "styled-components";
 import { useAuth } from "../../hooks/auth";
@@ -217,13 +218,14 @@ export function Dashboard() {
                   <UserName>{user.name}</UserName>
                 </User>
               </UserInfo>
-
-              <SettingsButton onPress={handleOpenSelectCategoryModal}>
-                <Icon color="success" name="settings" />
-              </SettingsButton>
-              <LogoutButton onPress={signOut}>
-                <Icon color="attention" name="power" />
-              </LogoutButton>
+              <HeaderButtons>
+                <SettingsButton onPress={handleOpenSelectCategoryModal}>
+                  <Icon color="text_dark" name="settings" />
+                </SettingsButton>
+                <LogoutButton onPress={signOut}>
+                  <Icon color="attention" name="power" />
+                </LogoutButton>
+              </HeaderButtons>
             </UserWrapper>
           </Header>
           <HighlightCards>

@@ -1,7 +1,7 @@
 import React from "react";
 import { FlatList } from "react-native";
-import { Button } from "../../../../components/Form/Button";
-import { paymentTypes } from "../../../../utils/paymentTypes";
+import { Button } from "../../../components/Form/Button";
+import { paymentTypes } from "../../../utils/paymentTypes";
 
 import {
   Container,
@@ -20,24 +20,14 @@ interface PaymentTypes {
 }
 
 interface Props {
-  paymentType: PaymentTypes;
-  setPaymentType: (paymentType: PaymentTypes) => void;
-  closeSelectPaymentType: () => void;
+  closePaymentTypeCreateModal: () => void;
 }
 
-export function PaymentTypesSelect({
-  paymentType,
-  setPaymentType,
-  closeSelectPaymentType,
-}: Props) {
-  function handlePaymentTypes(paymentType: PaymentTypes) {
-    setPaymentType(paymentType);
-  }
-
+export function PaymentTypesCreate({ closePaymentTypeCreateModal }: Props) {
   return (
     <Container>
       <Header>
-        <Title>Tipo de Pagamento</Title>
+        <Title>Tipos de Pagamentos</Title>
       </Header>
 
       <FlatList
@@ -45,10 +35,7 @@ export function PaymentTypesSelect({
         style={{ flex: 1, width: "100%" }}
         keyExtractor={(item) => item.key}
         renderItem={({ item }) => (
-          <Category
-            onPress={() => handlePaymentTypes(item)}
-            isActive={paymentType.key === item.key}
-          >
+          <Category onPress={() => {}}>
             <IconPayment name={item.icon} />
             <Name>{item.name}</Name>
           </Category>
@@ -57,7 +44,11 @@ export function PaymentTypesSelect({
       />
 
       <Footer>
-        <Button title="Selecionar" onPress={closeSelectPaymentType} />
+        <Button
+          title="Criar nova categoria"
+          color="secondary"
+          onPress={closePaymentTypeCreateModal}
+        />
       </Footer>
     </Container>
   );

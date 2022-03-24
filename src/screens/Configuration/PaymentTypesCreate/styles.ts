@@ -2,16 +2,9 @@ import styled from "styled-components/native";
 import { Feather } from "@expo/vector-icons";
 import { RFValue } from "react-native-responsive-fontsize";
 
-import {
-  GestureHandlerRootView,
-  RectButton,
-} from "react-native-gesture-handler";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import theme from "../../../global/styles/theme";
-
-interface CategoryProps {
-  isActive: boolean;
-}
 
 export const Container = styled(GestureHandlerRootView)`
   flex: 1;
@@ -24,10 +17,8 @@ export const Header = styled.View`
 
   background-color: ${({ theme }) => theme.colors.primary};
 
-  display: flex;
-  flex-direction: row;
   align-items: center;
-  justify-content: space-around;
+  justify-content: flex-end;
   padding-bottom: 19px;
 `;
 
@@ -37,37 +28,15 @@ export const Title = styled.Text`
   font-size: ${RFValue(18)}px;
 `;
 
-export const ContainerButton = styled(RectButton)`
-  font-family: ${({ theme }) => theme.fonts.regular};
-  color: ${({ theme }) => theme.colors.shape};
-  font-size: ${RFValue(18)}px;
-  font-weight: 400;
-  text-align: center;
-  line-height: ${RFValue(4)}px;
-  border-radius: ${RFValue(4)}px;
-  background-color: ${({ theme }) => theme.colors.success};
-  padding-left: ${RFValue(8)}px;
-`;
-
-export const ContainerButtonText = styled.Text`
-  width: 16px;
-  font-family: ${({ theme }) => theme.fonts.regular};
-  color: ${({ theme }) => theme.colors.title};
-  font-size: ${RFValue(18)}px;
-`;
-
-export const Category = styled.TouchableOpacity<CategoryProps>`
+export const Category = styled.TouchableOpacity`
   width: 100%;
   padding: ${RFValue(15)}px;
 
   flex-direction: row;
   align-items: center;
-
-  background-color: ${({ isActive }) =>
-    isActive ? theme.colors.secondary_light : theme.colors.background};
 `;
 
-export const IconCategory = styled(Feather)`
+export const IconPayment = styled(Feather)`
   font-size: ${RFValue(20)}px;
   margin-right: 16px;
 `;
@@ -86,9 +55,4 @@ export const Separator = styled.View`
 export const Footer = styled.View`
   width: 100%;
   padding: 24px;
-`;
-
-export const NewCategory = styled.View`
-  width: 100%;
-  margin-bottom: 8px;
 `;
