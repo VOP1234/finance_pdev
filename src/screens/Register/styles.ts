@@ -2,15 +2,14 @@ import styled from "styled-components/native";
 import { RFValue } from "react-native-responsive-fontsize";
 
 export const Container = styled.View`
-    flex: 1;
-     
-    background-color: #F0F2F5;
+  flex: 1;
 
+  background-color: ${({ theme }) => theme.colors.background};
 `;
 
 export const Header = styled.View`
-  background-color: #5636D3;
-  
+  background-color: ${({ theme }) => theme.colors.primary};
+
   width: 100%;
   height: ${RFValue(113)}px;
 
@@ -33,10 +32,7 @@ export const Form = styled.View`
   padding: 24px;
 `;
 
-
-export const Fields = styled.View`
-
-`;
+export const Fields = styled.View``;
 
 export const TransactionsTypes = styled.View`
   flex-direction: row;

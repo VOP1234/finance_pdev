@@ -257,11 +257,11 @@ export function Dashboard() {
               renderItem={({ item }) => <TransactionCard data={item} />}
             />
           </Transactions>
-          <Modal visible={categoryModalOpen}>
+          {/* <Modal visible={categoryModalOpen}>
             <Configuration
               closeSelectCategory={handleCloseSelectCategoryModal}
             />
-          </Modal>
+          </Modal> */}
         </>
       )}
     </Container>

@@ -8,7 +8,7 @@ import {
   getStatusBarHeight,
 } from "react-native-iphone-x-helper";
 import { DataListProps } from ".";
-import { BorderlessButton } from "react-native-gesture-handler";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 interface IconProps {
   color: "attention" | "text_dark";
@@ -35,7 +35,7 @@ export const UserWrapper = styled.View`
   width: 100%;
 
   padding: 0 24px;
-  margin-top: ${getStatusBarHeight() + RFValue(28)}px;
+  margin-top: ${getStatusBarHeight() + RFValue(16)}px;
 
   flex-direction: row;
   justify-content: space-between;
@@ -72,11 +72,11 @@ export const UserName = styled.Text`
   font-family: ${({ theme }) => theme.fonts.bold};
 `;
 
-export const LogoutButton = styled(BorderlessButton)`
+export const LogoutButton = styled(TouchableOpacity)`
   padding-left: 8px;
 `;
 
-export const SettingsButton = styled(BorderlessButton)``;
+export const SettingsButton = styled(TouchableOpacity)``;
 
 export const HeaderButtons = styled.View`
   display: flex;

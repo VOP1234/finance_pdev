@@ -6,11 +6,11 @@ import { Feather } from "@expo/vector-icons";
 export const Container = styled.View`
   flex: 1;
 
-  background-color: #f0f2f5;
+  background-color: ${({ theme }) => theme.colors.background};
 `;
 
 export const Header = styled.View`
-  background-color: #5636d3;
+  background-color: ${({ theme }) => theme.colors.primary};
 
   width: 100%;
   height: ${RFValue(113)}px;

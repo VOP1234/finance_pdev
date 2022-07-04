@@ -109,7 +109,8 @@ function AuthProvider({ children }: AuthProviderProps) {
 
   async function signOut() {
     setUser({} as User);
-
+    console.log("signOut");
+    console.log(user);
     await AsyncStorage.removeItem(dataKeyUser);
   }
 
@@ -136,7 +137,8 @@ function AuthProvider({ children }: AuthProviderProps) {
         signInWithApple,
         signOut,
         userStorageLoading,
-      }}>
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
