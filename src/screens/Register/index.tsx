@@ -5,15 +5,14 @@ import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import uuid from "react-native-uuid";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useNavigation } from "@react-navigation/native";
 
 import { Button } from "../../components/Form/Button";
-import { SelectButton } from "../../components/Form/SelectButton";
+import { CategorySelectButton } from "../../components/Form/CategorySelectButton";
 import { TransactionTypeButton } from "../../components/Form/TransactionTypeButton";
 // import { PaymentTypesSelect } from "../PaymentTypesSelect";
-import { InputForm } from "../../components/Form/InputForm";
-import { useForm } from "react-hook-form";
-
+import { Input } from "../../components/Form/Input";
 import { CategorySelect } from "./CategorySelect";
 
 import {
@@ -25,8 +24,9 @@ import {
   TransactionsTypes,
 } from "./styles";
 import { useAuth } from "../../hooks/auth";
+import { InputForm } from "../../components/Form/InputForm";
 
-interface FormData {
+interface FormData extends SubmitHandler<FieldValues> {
   name: string;
   amount: string;
 }
@@ -158,7 +158,7 @@ export function Register() {
               />
             </TransactionsTypes>
 
-            <SelectButton
+            <CategorySelectButton
               title={category.name}
               onPress={handleOpenSelectCategoryModal}
             />

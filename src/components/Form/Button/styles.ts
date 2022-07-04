@@ -1,6 +1,7 @@
 import styled from "styled-components/native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { RectButton } from "react-native-gesture-handler";
+import { TouchableOpacity } from "react-native";
 
 interface ContainerProps {
   color: "primary" | "secondary" | "attention";
@@ -8,7 +9,7 @@ interface ContainerProps {
 
 let theColor;
 
-export const Container = styled(RectButton)<ContainerProps>`
+export const Container = styled(TouchableOpacity)<ContainerProps>`
   width: 100%;
   ${({ theme, color }) =>
     color === "primary"

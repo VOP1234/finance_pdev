@@ -7,7 +7,7 @@ import { useTheme } from "styled-components";
 import { Dashboard } from "../screens/Dashboard";
 import { Register } from "../screens/Register";
 import { Resume } from "../screens/Resume";
-import { Configuration } from "../screens/Configuration";
+// import { Configuration } from "../screens/Configuration";
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
@@ -60,7 +60,7 @@ export function AppRoutes() {
         }}
       />
 
-      <Screen
+      {/* <Screen
         name="Config"
         component={Configuration}
         options={{
@@ -68,7 +68,7 @@ export function AppRoutes() {
             <MaterialIcons name="settings" size={size} color={color} />
           ),
         }}
-      />
+      /> */}
     </Navigator>
   );
 }

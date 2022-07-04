@@ -32,7 +32,7 @@ import {
 } from "./styles";
 import { useTheme } from "styled-components";
 import { useAuth } from "../../hooks/auth";
-import { Configuration } from "./Configuration";
+import { Configuration } from "../Configuration";
 
 interface HighlightProps {
   amount: string;
@@ -219,9 +219,9 @@ export function Dashboard() {
                 </User>
               </UserInfo>
               <HeaderButtons>
-                <SettingsButton onPress={handleOpenSelectCategoryModal}>
+                {/* <SettingsButton onPress={handleOpenSelectCategoryModal}>
                   <Icon color="text_dark" name="settings" />
-                </SettingsButton>
+                </SettingsButton> */}
                 <LogoutButton onPress={signOut}>
                   <Icon color="attention" name="power" />
                 </LogoutButton>
